@@ -1,7 +1,7 @@
-const Manager = require('./lib/Manager.js');
-const Engineer = require('./lib/Engineer.js');
-const Employee = require('./lib/Employee.js');
-const Intern = require("./lib/Intern.js");
+const Manager = require('./lib/Manager');
+const Engineer = require('./lib/Engineer');
+const Employee = require('./lib/Employee');
+const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const fs = require("fs");
 const path = require("path");
@@ -27,62 +27,62 @@ const team = []; // Store the team members
 //code examples from expert learning assistant
 //ternary operators in arrow function 
 
-const validateNotEmpty = (input) => {
-    return input.trim() !== "" ? true : "This field cannot be empty.";
-  };
+// const validateNotEmpty = (input) => {
+//     return input.trim() !== "" ? true : "This field cannot be empty.";
+//   };
   
-  const validateNumeric = (input) => {
-    return !isNaN(input) ? true : "Please enter a valid number.";
-  };
+//   const validateNumeric = (input) => {
+//     return !isNaN(input) ? true : "Please enter a valid number.";
+//   };
   
-  const validateEmail = (input) => {
-    // A simple email validation regex
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(input) ? true : "Please enter a valid email address.";
-  };
+//   const validateEmail = (input) => {
+//     // A simple email validation regex
+//     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+//     return emailRegex.test(input) ? true : "Please enter a valid email address.";
+//   };
 
 
-const promptManager = () => {
-  // Inquirer prompts for manager details
-//code from last activity
-  inquirer
-  .prompt([
-    {
-      type: "input",
-      name: "name",
-      message: "Enter the manager's name:",
-    },
-    {
-      type: "input",
-      name: "id",
-      message: "Enter the manager's employee ID:",
-    },
-    {
-      type: "input",
-      name: "email",
-      message: "Enter the manager's email address:",
-    },
-    {
-      type: "input",
-      name: "officeNumber",
-      message: "Enter the manager's office number:",
-    },
-  ])
-  .then((answers) => {
-    // Create a new Manager object and add it to the team
-    //'new' syntax from lesson
-    const manager = new Manager(
-      answers.name,
-      answers.id,
-      answers.email,
-      answers.officeNumber
-    );
-    team.push(manager);
+// const promptManager = () => {
+//   // Inquirer prompts for manager details
+// //code from last activity
+//   inquirer
+//   .prompt([
+//     {
+//       type: "input",
+//       name: "name",
+//       message: "Enter the manager's name:",
+//     },
+//     {
+//       type: "input",
+//       name: "id",
+//       message: "Enter the manager's employee ID:",
+//     },
+//     {
+//       type: "input",
+//       name: "email",
+//       message: "Enter the manager's email address:",
+//     },
+//     {
+//       type: "input",
+//       name: "officeNumber",
+//       message: "Enter the manager's office number:",
+//     },
+//   ])
+//   .then((answers) => {
+//     // Create a new Manager object and add it to the team
+//     //'new' syntax from lesson
+//     const manager = new Manager(
+//       answers.name,
+//       answers.id,
+//       answers.email,
+//       answers.officeNumber
+//     );
+//     team.push(manager);
 
-    // Call the function to get additional team members????
-    promptTeamMembers();
-  });
-};
+//     // Call the function to get additional team members????
+//     promptTeamMembers();
+//   });
+// };
 
 // When a user enters those requirements, the user is presented with a menu with the option to:
 // Add an engineer
