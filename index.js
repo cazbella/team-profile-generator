@@ -27,62 +27,171 @@ const team = []; // Store the team members
 //code examples from expert learning assistant
 //ternary operators in arrow function 
 
-// const validateNotEmpty = (input) => {
-//     return input.trim() !== "" ? true : "This field cannot be empty.";
-//   };
+const validateNotEmpty = (input) => {
+    return input.trim() !== "" ? true : "This field cannot be empty.";
+  };
   
-//   const validateNumeric = (input) => {
-//     return !isNaN(input) ? true : "Please enter a valid number.";
-//   };
+  const validateNumeric = (input) => {
+    return !isNaN(input) ? true : "Please enter a valid number.";
+  };
   
-//   const validateEmail = (input) => {
-//     // A simple email validation regex
-//     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-//     return emailRegex.test(input) ? true : "Please enter a valid email address.";
-//   };
+  const validateEmail = (input) => {
+    // A simple email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(input) ? true : "Please enter a valid email address.";
+  };
+  //NEED TO IMPLEMENT THESE
 
 
-// const promptManager = () => {
-//   // Inquirer prompts for manager details
-// //code from last activity
-//   inquirer
-//   .prompt([
-//     {
-//       type: "input",
-//       name: "name",
-//       message: "Enter the manager's name:",
-//     },
-//     {
-//       type: "input",
-//       name: "id",
-//       message: "Enter the manager's employee ID:",
-//     },
-//     {
-//       type: "input",
-//       name: "email",
-//       message: "Enter the manager's email address:",
-//     },
-//     {
-//       type: "input",
-//       name: "officeNumber",
-//       message: "Enter the manager's office number:",
-//     },
-//   ])
-//   .then((answers) => {
-//     // Create a new Manager object and add it to the team
-//     //'new' syntax from lesson
-//     const manager = new Manager(
-//       answers.name,
-//       answers.id,
-//       answers.email,
-//       answers.officeNumber
-//     );
-//     team.push(manager);
+const promptManager = () => {
+  // Inquirer prompts for manager details
+//code from last activity
+  inquirer
+  .prompt([
+    {
+      type: "input",
+      name: "name",
+      message: "Enter the manager's name:",
+    },
+    {
+      type: "input",
+      name: "id",
+      message: "Enter the manager's employee ID:",
+    },
+    {
+      type: "input",
+      name: "email",
+      message: "Enter the manager's email address:",
+    },
+    {
+      type: "input",
+      name: "officeNumber",
+      message: "Enter the manager's office number:",
+    },
+  ])
 
-//     // Call the function to get additional team members????
-//     promptTeamMembers();
-//   });
-// };
+  //https://www.educative.io/answers/how-to-use-the-inquirer-node-package
+  //Inquirer.js, the .answers syntax is often used in the callbacks provided to handle user responses after using inquirer.prompt().
+  .then((answers) => {
+    // Create a new Manager object and add it to the team
+    //'new' syntax from lesson
+    //example of OOP
+    //creates a new object
+    const manager = new Manager(
+      answers.name,
+      answers.id,
+      answers.email,
+      answers.officeNumber
+    );
+    //push to created array
+    team.push(manager);
+
+    // Call the function to get additional team members????
+      
+          promptTeamMembers();
+        });
+    };
+    
+    // Function to prompt for additional team members
+    const promptTeamMembers = () => {
+      // Inquirer prompts for selecting team members or finishing
+      inquirer
+        .prompt([
+          {
+            type: "list",
+            name: "memberType",
+            message: "Select the type of team member to add:",
+            choices: ["Engineer", "Intern", "Finish building the team"],
+          },
+        ])
+        .then((answer) => {
+          // Handle the user's choice
+          if (answer.memberType === "Engineer") {
+            // Call function to prompt for engineer information
+            promptEngineer();
+          } else if (answer.memberType === "Intern") {
+            // Call function to prompt for intern information
+            promptIntern();
+          } else {
+            // Need to finish building the team and generate HTML don't know HOW??????
+            //code from xpert learning assistant 
+            //Import the writeFile function from the fs module at the top of the file:
+
+
+            const { writeFile } = require('fs');
+            
+            
+            //After gathering all the user input and creating the team member objects, call the render function passing in the array of team member objects. This will generate the HTML content for the team profile:
+            
+            
+            const htmlContent = render(team);
+            
+            
+            //Create a function to write the HTML content to the file system. You can use the writeFile function from the fs module for this:
+            
+            
+            function writeToFile(fileName, data) {
+              writeFile(fileName, data, (err) => {
+                if (err) {
+                  console.error(err);
+                  return;
+                }
+                console.log('Team profile generated successfully!');
+              });
+            }
+            
+            
+            //Call the writeToFile function, passing in the file path and the generated HTML content:
+            
+            
+            writeToFile('/Users/carolinelane/Desktop/class/challenges/12-team-profile-generator/team-profile-generator/src/page-template.js', htmlContent);
+            
+            //Make sure to replace the file path with the actual path to the HTML file you want to write.
+            
+            
+            //With these modifications, the user's answers will be written to the HTML file specified in the writeToFile function.
+            
+            console.log("Team HTML generated successfully!");
+          }
+        });
+    };
+    
+    // Function to prompt for engineer information
+    const promptEngineer = () => {
+      // Inquirer prompts for engineer details
+      inquirer
+        .prompt([
+          // like manager, prompt for engineer details
+        ])
+        .then((answers) => {
+          // Create a new Engineer object and add it to the team
+          const engineer = new Engineer(/* pass answers here */);
+          team.push(engineer);
+    
+          // Call function to prompt for additional team members
+          promptTeamMembers();
+        });
+    };
+    
+    // Function to prompt for intern information
+    const promptIntern = () => {
+      // Inquirer prompts for intern details
+      inquirer
+        .prompt([
+          // Similar to manager, prompt for intern details
+        ])
+        .then((answers) => {
+          // Create a new Intern object and add it to the team
+          const intern = new Intern(/* pass answers here */);
+          team.push(intern);
+    
+          // Call the function to prompt for additional team members
+          promptTeamMembers();
+        });
+    };
+    
+    // Start the application by prompting for manager information
+    promptManager();
 
 // When a user enters those requirements, the user is presented with a menu with the option to:
 // Add an engineer
