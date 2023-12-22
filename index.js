@@ -109,21 +109,84 @@ const promptTeamMembers = () => {
 };
 
 const promptEngineer = () => {
-  // neeed to prompt for engineer details
-  inquirer.prompt([]).then((answers) => {
-    const engineer = new Engineer(/* pass answers here */);
-    team.push(engineer);
-    promptTeamMembers();
-  });
+  inquirer
+    .prompt([
+      {
+        type: 'input',
+        name: 'name',
+        message: "Enter the engineer's name:",
+        validate: validateNotEmpty,
+      },
+      {
+        type: 'input',
+        name: 'id',
+        message: "Enter the engineer's employee ID:",
+        validate: validateNumeric,
+      },
+      {
+        type: 'input',
+        name: 'email',
+        message: "Enter the engineer's email address:",
+        validate: validateEmail,
+      },
+      {
+        type: 'input',
+        name: 'github',
+        message: "Enter the engineer's GitHub username:",
+        validate: validateNotEmpty,
+      },
+    ])
+    .then((answers) => {
+      const engineer = new Engineer(
+        answers.name,
+        answers.id,
+        answers.email,
+        answers.github
+      );
+      team.push(engineer);
+      promptTeamMembers();
+    });
 };
 
+
 const promptIntern = () => {
-  // need to prompt for intern details
-  inquirer.prompt([]).then((answers) => {
-    const intern = new Intern(/* pass answers here */);
-    team.push(intern);
-    promptTeamMembers();
-  });
+  inquirer
+    .prompt([
+      {
+        type: 'input',
+        name: 'name',
+        message: "Enter the intern's name:",
+        validate: validateNotEmpty,
+      },
+      {
+        type: 'input',
+        name: 'id',
+        message: "Enter the intern's employee ID:",
+        validate: validateNumeric,
+      },
+      {
+        type: 'input',
+        name: 'email',
+        message: "Enter the intern's email address:",
+        validate: validateEmail,
+      },
+      {
+        type: 'input',
+        name: 'school',
+        message: "Enter the intern's school:",
+        validate: validateNotEmpty,
+      },
+    ])
+    .then((answers) => {
+      const intern = new Intern(
+        answers.name,
+        answers.id,
+        answers.email,
+        answers.school
+      );
+      team.push(intern);
+      promptTeamMembers();
+    });
 };
 
 // Start the application by prompting for manager information
