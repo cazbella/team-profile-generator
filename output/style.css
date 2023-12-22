@@ -2,7 +2,6 @@ body {
     background-color: rgb(178, 178, 230);
 }
 
-
 .team-heading {
     background-color: rgb(81, 3, 81);
     color: white;
@@ -12,10 +11,8 @@ body {
     border-radius: 10px; 
     margin: 10px; 
     border: solid black 2px;
-    border-top-left-radius: 4px; 
-    border-top-right-radius: 4px;
-    
-    
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 350px;
 }
 
 .card-header {
@@ -32,7 +29,32 @@ body {
         align-items: center;
     }
 
-    .card {
+    .employee-card {
         width: 100%;
     }
 }
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .team-area {
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .employee-card {
+        width: 48%; 
+        margin-bottom: 1.5rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .team-area {
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .employee-card {
+        width: calc(33.33% - 20px); 
+        margin-bottom: 1.5rem;
+    }
+}
+

@@ -7,12 +7,13 @@ const path = require('path');
 const render = require('./src/page-template.js');
 
 //this is for html output. Need to create output directory
+//detects environment and inserts proper slash
 const OUTPUT_DIR = path.resolve(__dirname, 'output');
 const outputPath = path.join(OUTPUT_DIR, 'team.html');
 
 const team = []; // Store the team members
 
-//need to use this function
+//empty/not empty
 const validateNotEmpty = (input) => {
   return input.trim() !== '' ? true : 'This field cannot be empty.';
 };
